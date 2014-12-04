@@ -1,0 +1,319 @@
+E1.1 What command would you use to read about the terminal driver, tty
+(not the tty command)? How would you read a local tty man page that
+was kept in /usr/local/share/man?
+E1.2 Does a system-wide config file control the behavior of the man command at your site? What lines would you add to this file if you wanted
+to store local material in /doc/man? What directory structure would
+you have to use in /doc/man to make it a full citizen of the man page
+hierarchy?
+E1.3 What is the current status of Linux kernel development? What are the
+hot issues? Who are the key players? How is the project managed?
+E1.4 Research several UNIX and Linux systems and recommend an operating system for each of the following applications. Explain your choices.
+a) A single user working in a home office
+b)A university computer science lab
+c) A corporate web server
+d) A server cluster that runs the database for a shipping company
+E1.5 Suppose you discover that a certain feature of Apache httpd does not
+appear to work as documented on Ubuntu.
+a) What should you do before reporting the bug?
+b)If you decide that the bug is real, whom should you notify and how?
+c) What information must be included to make the bug report useful?
+E1.6 Linux has made dramatic inroads into production environments. Is
+UNIX doomed? Why or why not?
+
+From the Library of Wow! eBook .Com
+
+Scripting/Shell
+
+Scripting/Shell
+
+2 Scripting and the Shell
+
+--
+E2.1 UNIX allows spaces in filenames. How do you find files whose names
+contain embedded spaces? How do you delete them? Do bash, Perl, and
+Python handle spaces in filenames gracefully, or do you need to take
+special precautions? Outline appropriate rules of thumb for scripting.
+E2.2 Write a simple bash script (or pair of scripts) to back up and restore
+your system.
+E2.3 Using regular expressions, write a Perl or Python script to parse a date
+in the form produced by the date command (e.g., Tue Oct 20 18:09:33
+PDT 2009) and determine whether it is valid (e.g., no February 30th,
+valid time zone, etc.). Is there an off-the-shelf library or module that
+lets you do this in one line? If so, explain how to install it and recode
+your script to use it.
+E2.4 Write a script that enumerates the system’s users and groups from
+/etc/passwd and /etc/group (or their network database equivalents).
+For each user, print the user’s UID and the groups of which the user is a
+member.
+E2.5 Refine the get_string example on page 63 to accept only integers. It
+should accept three parameters: the prompt string, a lower limit on the
+acceptable integers, and an upper limit on the acceptable integers.
+E2.6 Find an undocumented script that’s used in your environment. Read it
+and make sure you understand its function. Add comments and write a
+man page for the script.
+E2.7 Write a script that displays a one-screen summary of status data related
+to one of the following categories: CPU, memory, disk, or network. The
+script should leverage OS commands and files to build an easy-tounderstand dashboard that includes as much information as possible.
+E2.8 Build a menu-driven interface that makes it easy to select commandline options for top, sar, or the performance analysis tool of your
+choice.
+E2.9 Write a script to test a server’s network connectivity and the upstream
+services on which it depends (e.g., DNS, file service, LDAP or other
+directory service). Have it send you email or a text message if problems
+are discovered.
+
+From the Library of Wow! eBook .Com
+
+Booting
+
+Booting
+
+--
+E3.1 Is it really that bad to turn off a UNIX or Linux system with the power
+button on the computer case? What about unplugging the computer
+from the wall? Explain your answer. See if you can determine the likelihood of a bad outcome by doing Internet research.
+E3.2 Use the GRUB command line to boot a kernel that isn’t in grub.conf.
+E3.3 Explain the concept of run levels. List the run levels defined on one of
+your local systems, and briefly describe each. Why is Ubuntu’s run-level
+concept different from that of other Linux distributions?
+E3.4 Write a startup script to start the “foo” daemon (/usr/local/sbin/foo), a
+network service. Show how you would glue it into the system to start
+automatically at boot time.
+E3.5 If a system is at run level 3 and you run the command telinit 1, what
+steps will be taken by init? What will be the final result of the command?
+E3.6 Draw a dependency graph that shows which daemons must be started
+before other daemons on your system.
+E3.7 List the steps used to create a working multiboot system that runs both
+Linux and Windows. Use GRUB.
+
+From the Library of Wow! eBook .Com
+
+Access Control
+
+Access Control
+
+4
+
+--
+E4.1 Use the find command with the -perm option to locate five setuid files
+on your system. For each file, explain why the setuid mechanism is necessary for the command to function properly.
+
+a) One entry that allows users matt and lisa to service the printer, unjam it, and restart printer daemons on the machine printserver
+b)One entry that allows drew, smithgr, and jimlane to kill jobs and
+reboot the machines in a student lab
+
+Access Control
+
+E4.2 Create two entries for the sudoers configuration file:
+
+E4.3 Create three “shocking nonsense” passphrases but keep them to yourself. Run your three passphrases through md5sum and report these results. Based on the current state of cryptographic technology, is it safe
+to share the MD5 results? Why or why not?
+E4.4 Enumerate a sequence of commands that modify someone’s password
+entry, and show how you could cover your tracks. Assume you had only
+sudo power (all commands allowed, but no shells or su).
+E4.5 Install sudo configured to send its mail tattling about misuse to you.
+Use it to test the sudo entries of the previous question with local usernames and machine names; verify that sudo is logging to syslog properly. Look at the syslog entries produced by your testing. (Requires root
+access; you’ll most likely have to tweak /etc/syslog.conf, too.)
+E4.6 On a Solaris, HP-UX, or AIX system, set up an RBAC role that allows
+members to mount and unmount filesystems. Assign this role to two
+users. (Root access required.)
+a) What steps are required? Can you limit the permitted operations to
+certain filesystems or types of filesystems?
+b) Reimplement your solution as a sudo configuration. Is it more or less
+complicated to set up than the RBAC solution? Can you limit the
+permitted operations to certain filesystems or types of filesystems?
+
+From the Library of Wow! eBook .Com
+
+--
+E5.1 Explain the relationship between a file’s UID and a running process’s
+real UID and effective UID. Besides file access control, what is the purpose of a process’s effective UID?
+E5.2 Suppose that a user at your site has started a long-running process that
+is consuming a significant fraction of a machine’s resources.
+a) How would you recognize a process that is hogging resources?
+b)Assume that the misbehaving process might be legitimate and
+doesn’t deserve to die. Show the commands you would use to suspend the process temporarily while you investigate.
+c) Later, you discover that the process belongs to your boss and must
+continue running. Show the commands you’d use to resume the task.
+d)Alternatively, assume that the process needs to be killed. What signal
+would you send, and why? What if you needed to guarantee that the
+process died?
+E5.3 Find a process with a memory leak (write your own program if you
+don’t have one handy). Use ps or top to monitor the program’s memory
+use as it runs.
+E5.4 Write a simple Perl script that processes the output of ps to determine
+the total VSZ and RSS of the processes running on the system. How do
+these numbers relate to the system’s actual amount of physical memory
+and swap space?
+
+From the Library of Wow! eBook .Com
+
+The Filesystem
+
+6 The Filesystem
+
+--
+E6.1 What is a umask? Create a umask that would give no permissions to
+the group or the world.
+E6.2 What is the difference between hard links and symbolic (soft) links?
+When is it appropriate to use one or the other?
+
+E6.4 When installing a new system, it’s important to set up the system volumes such that each filesystem (/var, /usr, etc.) has adequate space for
+both current and future needs. The Foobar Linux distribution uses the
+following defaults:
+/
+/var
+/boot
+<swap>
+/usr
+
+2GB
+100MB
+--
+E6.3 What steps would be needed on your system for a Windows NTFS partition to be automatically mounted from a local hard disk? What’s the
+most appropriate mount point for such a partition according to your
+system’s conventions and the conventions in use at your site?
+
+What are some potential problems with this arrangement on a busy
+server box?
+E6.5 Why is it a good idea to put some partitions (such as /var, /home, and
+swap) on a separate drive from other data files and programs? What
+about /tmp? Give specific reasons for each of the filesystems listed.
+E6.6 Write a script that finds all the hard links on a filesystem.
+E6.7 Give commands to accomplish the following tasks.
+a) Set the permissions on the file README to read/write for the owner
+and read for everyone else.
+b)Turn on a file’s setuid bit without changing (or knowing) the current
+permissions.
+c) List the contents of the current directory, sorting by modification
+time and listing the most recently modified file last.
+d)Change the group of a file called shared from “user” to “friends”.
+E6.8 By convention, the /tmp directory is available to all users who care to
+create files there. What prevents one user from reading or deleting another’s temporary files? What’s to prevent a disgruntled user from filling up /tmp with junk files? What would be the consequences of such
+an attack?
+
+From the Library of Wow! eBook .Com
+
+Adding Users
+
+7 Adding New Users
+
+Adding and removing users is a routine chore on most systems. These tasks are
+--
+E7.1 How is a user’s default group determined? How would you change it?
+E7.2 Explain the differences among the following umask values: 077, 027,
+022, and 755. How would you set one of these values as a site-wide default for new users? Can you impose a umask standard on your users?
+E7.3 What is the purpose of the shadow password file?
+E7.4 Determine what authentication system the login program on your system uses. If it uses PAM, determine what other programs on the system
+also use PAM.
+
+E7.6 Determine the naming convention for new users at your site. What are
+the rules? How is uniqueness preserved? Can you think of any drawbacks? How are users removed?
+E7.7 Find a list of names (from a local on-line telephone directory, perhaps)
+and use it as the input to a script that forms login names according to
+the naming convention at your site. How many users can you accommodate before you have a collision? How many collisions are there
+overall? Use the data to evaluate your site’s naming convention, and
+suggest improvements.
+
+Adding Users
+
+E7.5 List the steps needed to add a user to a system without using useradd.
+What extra steps are needed for your local environment?
+
+E7.8 Write a script to help monitor the health of your /etc/passwd file. (Parts
+b and e require root access unless you’re clever.)
+a) Find any entries that have UID 0.
+b)Find any entries that have no password (needs /etc/shadow).
+c) Find any sets of entries that have duplicate UIDs.
+d)Find any entries that have duplicate login names.
+e) Find any entries that have no expiration date (needs /etc/shadow).
+E7.9 Write a PAM module to perform authentication by randomly generating a PIN code, sending it to the user’s cell phone as an SMS message,
+and prompting the user to enter the PIN code for verification. Install
+your module and configure it into the PAM login stack to achieve twofactor authentication.
+
+From the Library of Wow! eBook .Com
+
+Storage
+
+8 Storage
+
+UNIX storage is looking more and more like a giant set of Lego blocks that you
+--
+E8.2 Logical volume managers are powerful but can be confusing if not well
+understood. Practice adding, removing, and resizing disks in a volume
+group. Show how you would remove a device from one volume group
+and add it to another. What would you do if you wanted to move a
+logical volume from one volume group to another?
+
+Storage
+
+E8.1 Describe any special considerations that an administrator should take
+into account when designing a storage architecture for each of the following applications.
+
+E8.3 Using printed or Internet resources, identify the best-performing SCSI
+and SATA drives. Do the benchmarks used to evaluate these drives reflect the way that a busy server would use its boot disk? What cost premium would you pay for SCSI, and how much performance improvement (if any) would you get for the money?
+E8.4 Add a disk to your system and set up a partition or logical volume on
+the new disk as a backup root partition. Make sure you can boot from
+the backup root and that the system runs normally when so booted.
+Keep a journal of all the steps required to complete this task. You may
+find the script command helpful. (Requires root access.)
+E8.5 What is a superblock and what is it used for? Look up the definition of
+the ext4 superblock structure in the kernel header files and discuss
+what each of the fields in the structure represents.
+E8.6 Use mdadm and its -f option to simulate a failed disk in a Linux RAID
+array. Remove the disk from the array and add it back. How does
+/proc/mdstat look at each step?
+
+From the Library of Wow! eBook .Com
+
+282
+
+Chapter 8
+
+Storage
+--
+E8.7 What fields are stored in an inode on an ext4 filesystem? List the contents of the inode that represents the /etc/motd file. Where is this file’s
+filename stored? (Tools such as hexdump and ls -i might help.)
+E8.8 Examine the contents of a directory file with a program such as od or
+hexdump. Each variable-length record represents a file in that directory. Look up the on-disk structure of a directory and explain each
+field, using an example from a real directory file. Next, look at the
+lost+found directory on a filesystem that uses them. Why are there so
+many names there when the lost+found directory is empty?
+E8.9
+
+Write a program that traverses the filesystem and prints the contents
+of the /etc/motd and /etc/magic files. But don’t open the files directly;
+open the raw device file for the root partition and use the seek and
+read system calls to decode the filesystem and find the appropriate
+data blocks. /etc/motd is usually short and will probably contain only
+direct blocks. /etc/magic should require you to decode indirect
+blocks. (If it doesn’t, pick a larger text file.)
+Hint: when reading the system header files, be sure you have found
+the filesystem’s on-disk inode structure, not the in-core inode structure. (Requires root access.)
+--
+E9.1 A local user has been abusing his crontab privileges by running expensive tasks at frequent intervals. After asking him to stop several times,
+you are forced to revoke his privileges. List the steps needed to delete
+his current crontab and make sure he can’t add a new one.
+E9.2 Think of three tasks (other than those mentioned in this chapter) that
+might need to be run periodically. Write crontab entries for each task
+and specify where they should go on your system.
+
+E9.4 Write a script that keeps your startup files (~/.[a-z]*) synchronized
+among all the machines on which you have an account. Schedule this
+script to run regularly from cron. (Is it safe to blindly copy every file
+whose name starts with a dot? How will you handle directories? Should
+files being replaced on the destination machines be backed up before
+they are overwritten?)
+
+Cron
+
+E9.3 Choose three entries from your system’s crontab files. Decode each one
+and describe when it runs, what it does, and why you think the entry is
+needed. (Requires root access.)
+
+From the Library of Wow! eBook .Com
+
+Backups
+
+10 Backups
+
+At most sites, the information stored on computers is worth far more than the
