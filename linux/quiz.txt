@@ -1,7 +1,7 @@
 What is the second field of 'ls -l'?,number of links,owner name,number of bytes of file,file mode
 What is the environment variable that holds the normal bash prompt?,PS1,PATH,SHELL,TERM
 What command can be used to view the loaded modules formatted into a readable format?,lsmod,showmod,modules,kldstat
-What runlevel will cause the system will reboot?6,3,5,1
+What runlevel will cause the system to reboot?,6,3,5,1
 What command is used to remove a variable from the bash shell?,unset,noset,varmod,var
 In what configuration file is the default runlevel set?,/etc/inittab,/etc/rc/inittab,/etc/init.d/runlevel,/etc/rc.d/runlevel
 Which section of the man pages holds the file formats?,5,3,8,1
