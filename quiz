@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+
+# Global variables and initializations
+OLDIFS="$IFS"
+ARGC=$#
+DELIMETER=csv
+OPTIONS=1
+COUNT=0
+WRONG=0
+
+list=()
+normal="$(tput sgr0)"
+bold="$(tput bold)"
+underline="$(tput smul)"
+yellow="$(tput setaf 3)"
+blackf="$(tput setaf 0)"
+blackb="$(tput setab 0)"
+redf="$(tput setaf 1)"
+redb="$(tput setab 1)"
+greenf="$(tput setaf 2)"
+greenb="$(tput setab 2)"
+bluef="$(tput setaf 4)"
+blueb="$(tput setab 4)"
+magentaf="$(tput setaf 5)"
+magentab="$(tput setab 5)"
+cyanf="$(tput setaf 6)"
+cyanb="$(tput setab 6)"
+whitef="$(tput setaf 7)"
+whiteb="$(tput setab 7)"
+hidecursor="$(tput civis -- invisible)"
+showcursor="$(tput cnorm -- normal)"
+clearline="$(tput el)"
+
+N="${normal}"
+B="${bold}"
+U="${underline}"
+Y="${yellow}"
+BLF="${blackf}"
+BLB="${blackb}"
+RF="${redf}"
+RB="${redb}"
+GF="${greenf}"
+GB="${greenb}"
+BF="${bluef}"
+BB="${blueb}"
+MF="${magentaf}"
+MB="${magentab}"
+CF="${cyanf}"
+CB="${cyanb}"
+WF="${whitef}"
+WB="${whiteb}"
+HC="${hidecursor}"
+SC="${showcursor}"
+CL="${clearline}"
+
+red()     { alert; }
+yellow()  { notice; }
+magenta() { info; }
+white()   { ask; }
+alert()   { printf "${redf}$*${normal}\n"; break; }
+notice()  { printf "${yellow}$*${normal}\n"; }
+info()    { printf "${magentaf}$*${normal}\n"; }
+ask()     { printf "${whitef}$*${normal}"; }
+option()  { printf "${Y}[${N}${BF}$1${N}${Y}/${N}${BF}$2${N}${Y}]${N}: " ;}
+quit(){ local message="$1"; alert "${message:-Exiting session!}"; exit 1; }
+
+usage()
+{
+cat <<EOF
+
+Read in a quiz and test your knowledge
+
+     Options:
+        -f <path>               Read in quiz file
+        -c <int>                Retry count for incorrect answers
+        -d <type>               Delimeter used in quiz file, 'csv/colon' (def: csv)
+        -o                      Multiple choice off, effectively fill in the blank
+
+Usage: $0 -f linuz.quiz -d csv
+EOF
+}
+
+argcheck() {
+  # if less than n argument
+  if [ $ARGC -lt $1 ]; then
+          quit "Missing arguments! Use \`\`-h'' for help."
+  fi
+}
+
+validate_file(){
+ fgrep -q "$DELIMETER" $FILE || quit "Q/A not formatted for delimeter in file, try \`\`-d'' or reformat file"
+}
+
+correct()   { echo "$OPTION is correct"; break }
+incorrect() { notice "$OPTION is incorrect" }
+
+# This won't work
+line_order(){
+  while read line
+  do
+    delim="${line//[^${DELIMETER}]}"
+    c="${delim}"
+    options=$(eval echo {1..${c}})
+  done < $FILE
+}
+
+multiple_choice(){
+  select OPTION in $@;
+  do
+    test $OPTION -eq $ANSWER && correct || incorrect
+    let COUNT++
+    test $COUNT -ge $WRONG && alert "Too many failed attempts!"
+  done
+}
+
+fill_in(){
+}
+
+argcheck 1
+
+while getopts "hc:d:f:o:" OPTION
+do
+  case $OPTION in
+    h) usage;;
+    c) COUNT="$OPTARG";;
+    f)
+      FILE="$OPTARG"
+      test -f "$FILE" || quit "$FILE is not a valid file or doesn't exist";;
+    d)
+      if [[ "$OPTARG" == csv ]]; then
+        DELIMETER=","
+      elif [[ "$OPTARG" == colon ]]; then
+        DELIMETER=":"
+      else
+        echo "Unknown delimeter"
+        exit $UNKNOWN
+      fi
+      ;;
+    o) OPTIONS="0";;
+   \?) exit 1 ;;
+  esac
+done
+
+validate_file
+test $OPTIONS -eq 1 && multiple_choice
+
+while IFS="$DELIMETER" read q a $options
+do
+   #[[ $i = *$'\n'* ]] && multiple_choice && continue
+ done < <(line_order)
