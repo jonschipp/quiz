@@ -1,0 +1,2 @@
+What is the 5xx class of errors?,Informational, Success, Client Error, Server Error
+What is the 4xx class of errors?,Informational, Success, Client Error, Server Error
