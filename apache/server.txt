@@ -1,0 +1,1 @@
+What does apachectl do?,restart the server, terminate the server, check config file for errors
