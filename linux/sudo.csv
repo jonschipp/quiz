@@ -1,0 +1,70 @@
+What do paranthesis indicate after the equal sign in a sudo policy?,Run as,
+What is the default run as (command executed as) user in sudo?,root,wheel,admin,you
+In a sudo policy what delimeter can be used to list multiple items in the same field?,comma,equal sign,colon,semi-colon
+Sudo processes rules in order - which rule matches?,last,first
+The sudoers file must always end in blank line?,true,false
+Only root and users that can run ALL commands on the current host can use '-U'?,true,false
+Sudo supports character classes?,true,false
+Ranges like www[0-9] and [A-z] are allowed in sudoers?,true,false
+Sudo can match program arguments in the command field of a sudo policy?,true,false
+In the command field of a sudo policy which character(s) runs a program only if no arguments are given?,"",',0,"
+The following are valid character types for aliases in a sudo policy?,capital letters and numbers and underscores,lowercase letters and numbers,letters and underscores
+An alias name must begin with a capital letter?,true,false
+Group names are specified by prefixing what character before the group?,%,$,:,;
+User ID's are specified by prefixing what character before the UID?,#,$,%,:
+The user specification in '#10000 ALL = /sbin/reboot' is what type?,UID,GID,netgroup,ldap
+Group ID's are specified by prefixing what character before the GID?,%#,#,%,%:
+The user specification in '%#0 ALL = ALL' is what type?,GID,UID,netgroup,ldap?
+NIS netgroups are specified by prefixing what character before the netgroup?,+,$,%,#
+The user specification in '+webmasters ALL = /opt/apache22/bin/*' is what type?,netgroup,GID,UID,ldap
+Sudo determines name of the localhost by running which command?,hostname,hosts,dig,getent
+Sudo uses which grammer for its configuration?,EBNF,BNF,ABNF,CFG
+localhost does not work in a rule if that's what hostname returns?,false,true
+The host specification is valid in 'mike 192.0.2.1 = ALL'?,true,false
+The host specification is invalid in 'mike 192.0.2.0/24 = ALL'?,false,true
+In 'pete ALL ("%: Domain Users", %operator, lpd) ALL' what is the name of the specification enclosed in parantheses?,run as,group,user,host
+A tag is a flag that changes how the command runs?,true,false
+Which of the following is a tag?,NOEXEC,lecture,editor,fqdn
+insults and rootpw and setenv are known as?,options,tags
+Which option will change the default run as user to operator?,Defaults>operator,Defaults user=operator,Defaults:operator,Defaults username=operator
+'mike ALL = NOEXEC: ALL, EXEC: /usr/bin/newaliases' is an example of what type of listing?,whitelisting,blacklisting
+A user could run 'sudo /bin/sh' but that new shell won't be able to execute any new commands other than those built into the shell if what tag is set?,NOEXEC,EXEC,NOLOG_INPUT,NOLOG_OUTPUT
+Sudoedit can be used to let a user edit a privileged file with running a text editor as root?,true,false
+'%wheel ALL = sudoedit /etc/ssh/sshd_config' allows the wheel group to edit sshd_config?,true,false
+Which command line option will display detailed information about your sudo program?,-V,-v,-l,-L
+What feature allows sudo to be enhanced by additional functionality?plugins,tasks,kernels,features
+Sudo enables coredumps by default (disable_coredump=false)?,true,false
+Does 'sudo cd /root' allow you to work within the root directory?,false,true
+By default sudo strips all environment variables except the most basic (TERM PATH HOME MAIL SHELL LOGNAME USER USERNAME)?,true,false
+The option used to strip non-essential environment variables is?,env_reset,env_set,reset_env,env_delete
+What command line option can be used to ask sudo to not change a user's environment?,-E,-e,-U,-H
+What command line option simulates a new login as the target user and reads the target's dot files?-i,-s,-u,-H
+What option is used to define a trusted paths for which sudo will only execute programs from if a rule matches?,secure_path,path,set_env,permit_path
+If 'Defaults env_file='/etc/sudoenv' and env_file contains VAR1=test - what additional option is required for the variable to be set?,env_keep += 'VAR1',set_env VAR1,set_env += 'VAR1',set_env = 'VAR1'
+What option can be used to give you a root shell when executing 'sudo' by itself?,shell_noargs,noargs_shell,noargs_root,shell_root
+What command line option is the equivalent of sudo option shell_noargs?,-s,-i,-M,-m
+Which commands can be  used to run a shell but retain your current environment?,sudo su -m,sudo -m, sudo su -, sudo su
+What option is needed to run a program without a terminal such as in automation scripts?,!requiretty,requiretty,notty,term_no
+What version of sudo and later supports cryptographic checksums of a command before running it?1.8.6,1.8.7,1.8,2.1
+DNS checks can be use instead of hostnames with what sudo option?,fqdn,name_resolution,dns_lookup,dns_on
+To avoid your included configuration from being overridden by globals where should the include statement appear in sudoers?,bottom,top
+The statement '#include /etc/sudoers.d/%h' will include the file with the same name as the host?,true,false
+Sudo reads and processes included files in lexical order - Lexical order means: numbers then upper case letters then lower case letters then accented characters?true,false
+Sudo logs to which syslog facility by default?,LOCAL 2,AUTH,LOCAL 7,INFO
+Options mail_no_host mail_no_perms and mail_no_user can be used to alert on suspicious activity?,true,false
+What option can be used to record the output of a user's sudo session?,log_output,log_detail,debug = terminal
+What tool can be used to investigate a user's sudo activity in further detail?,sudoreplay,sudolog,sudoview,sudoids
+What type of logging adds the TSID used by sudoreplay to view a specific session?,log_input or log_output,input_log or output_log,iolog
+The default location of sudo I/O logs is /v/ar/log/sudo-io - what option can be used to change the location?iolog,iolog_dir,io_dir,log_dir
+Replaying sudo session 0000001 (TSID) can be done with which command?,sudoreplay 0000001,sudoreplay -l 0000001,sudoview 00000001
+Which command will search for sessions matching a user executing sudo from the /etc directory?,sudoreplay -l cwd /etc,sudoreplay -l pwd /etc,sudoreplay -s pwd /etc,sudoreplay -s cwd /etc
+Which option tells sudo to require the root password like su instead of the user's password?,rootpw,pw_root,root_passwd,rootpass
+What is the default password timeout value (passwd_timeout) for a user to type a password into sudo in minutes?,5,1,4,2
+What is the default number of password attempts (passwd_tries) before sudo logs a failure and exits?3,6,4,5
+The statement 'Defaults:%wheel rootpw' configures sudo to require the root password for members of the wheel group?,true,false
+Where does sudo store timestamps used to determine when to ask for a password again?,/var/db/sudo,/var/lib/sudo/,/var/sudo/cache,/var/sudo/db
+What is the default value of the number of minutes that can elapse before sudo will ask for a passwd again (timestamp_timeout)?,5,7,10,15
+What command line option removes the user's time stamp entirely - useful when away from keyboard?,-K,-k,-L,-l
+What command line option allows a user to view their sudo policy showing which commands they can run using sudo?,-l,-L,-A,-k
+A user can update the timestamp without running a command with which command line option?,-v,-k,-K,-A
+Running a command in the background with sudo can be executed with the -b command line option?,true,false
