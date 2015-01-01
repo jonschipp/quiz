@@ -33,6 +33,8 @@
 
 	$correct_answers = 0;
 
+	system("clear");
+
 	foreach ($quiz_data as $quiz_datum) {
 		echo $quiz_datum['question'] . "\n";
 
@@ -42,15 +44,15 @@
 			echo "$i) " . $quiz_datum['answer_' . $i] . "\n";
 		}
 
-		$answer = fgets(STDIN);
+		$answer = trim(fgets(STDIN));
 
 		if ($answer == "1") {
-			$correct_answer++;
+			$correct_answers++;
 		}
 
 		system("clear");
 	}
 
-	//var_dump($quiz_data);
+	echo "You answered $correct_answers questions correctly\n";
 
 	fclose($file);
