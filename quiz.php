@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-	/* TODO: 
+	/* TODO:
 	 *   Add command line options for controlling:
 	 *     1) Number of questions
 	 *     2) Order of questions
@@ -10,7 +10,7 @@
 
 	$delimiter = ",";
 
-	if ($argc < 2) { 
+	if ($argc < 2) {
 		die("Usage: {$argv[0]} path/to/quiz.txt\n");
 	}
 
@@ -22,7 +22,7 @@
 
 	while (($data = fgetcsv($file, 1000, $delimiter)) !== FALSE) {
 		$quiz_data[$cnt]['question'] 	= $data[0];
-		$quiz_data[$cnt]['correct']		= $data[1]; 
+		$quiz_data[$cnt]['correct']		= $data[1];
 
 		for ($i=2; $i<count($data); $i++) {
 			$quiz_data[$cnt]['answer_' . $i] = $data[$i];
