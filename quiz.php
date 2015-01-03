@@ -36,19 +36,29 @@
 	system("clear");
 
 	foreach ($quiz_data as $quiz_datum) {
+		foreach ($quiz_datum as $key => $value) {
+			if ($key == 'question') {
+				continue;
+			}
+
+			$temp[] = $value;
+                }
+		shuffle($temp);
 		echo $quiz_datum['question'] . "\n";
 
-		echo "1) " . $quiz_datum['correct'] . "\n";
-
-		for ($i=2; $i<count($quiz_datum); $i++) {
-			echo "$i) " . $quiz_datum['answer_' . $i] . "\n";
-		}
+		for ($i=0; $i<count($temp); $i++) {
+			$n = $i+1;
+			echo "$n) " . $temp[$i] . "\n";
+		}	
 
 		$answer = trim(fgets(STDIN));
 
-		if ($answer == "1") {
+		if ($temp[$answer-1] == $quiz_datum['correct']) {
 			$correct_answers++;
 		}
+
+		// clear out the temp array
+		$temp = array();
 
 		system("clear");
 	}
