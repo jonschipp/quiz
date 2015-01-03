@@ -19,7 +19,10 @@ mkdir PythonForDummies
 
 Read from the quizzes:
 ```
-quiz -f FreeBSD/ports.txt
+quiz.php -f FreeBSD/ports.txt -t {multi|fill}
+
+-f	- file
+-t	- quiz type ("fill" for fill in the blank or "multi" for multiple choice"
 ```
 
 [More info](http://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013)
