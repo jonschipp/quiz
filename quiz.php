@@ -5,16 +5,19 @@
 	 *     1) Number of questions
 	 *     2) Order of questions
 	 * 		 3) Set delimiter
-	 * 		 4) Option to omit multiple choice answers
    */
+
+	$options = getopt("f:t:");
+	$quiz = $options['f'];
+	$type = $options['t'];	
 
 	$delimiter = ",";
 
-	if ($argc < 2) {
-		die("Usage: {$argv[0]} path/to/quiz.txt\n");
+	if ($argc < 5) {
+		die("Usage: {$argv[0]} -f path/to/quiz.txt -t {multi|fill}\n");
 	}
 
-	if (($file = @fopen($argv[1], "r")) === FALSE) {
+	if (($file = @fopen($quiz, "r")) === FALSE) {
 		die("Could not open {$argv[1]} for reading\n");
 	}
 
@@ -46,17 +49,23 @@
 		shuffle($temp);
 		echo $quiz_datum['question'] . "\n";
 
-		for ($i=0; $i<count($temp); $i++) {
-			$n = $i+1;
-			echo "$n) " . $temp[$i] . "\n";
+		if ($type=="multi") {
+			for ($i=0; $i<count($temp); $i++) {
+				$n = $i+1;
+				echo "$n) " . $temp[$i] . "\n";
+			}
 		}	
 
 		$answer = trim(fgets(STDIN));
-
-		if ($temp[$answer-1] == $quiz_datum['correct']) {
-			$correct_answers++;
+		if ($type == "multi") {
+			if ($temp[$answer-1] == $quiz_datum['correct']) {
+				$correct_answers++;
+			}
+		} elseif ($type == "fill") {
+			if (strcasecmp($answer, $quiz_datum['correct']) == 0) {
+				$correct_answers++;
+			}
 		}
-
 		// clear out the temp array
 		$temp = array();
 
