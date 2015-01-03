@@ -37,7 +37,7 @@
 	$correct_answers = 0;
 
 	system("clear");
-
+	$q = 1;
 	foreach ($quiz_data as $quiz_datum) {
 		foreach ($quiz_datum as $key => $value) {
 			if ($key == 'question') {
@@ -47,6 +47,8 @@
 			$temp[] = $value;
                 }
 		shuffle($temp);
+		echo "Question " . $q . " of " . count($quiz_data) . "\n\n";
+		$q++;
 		echo $quiz_datum['question'] . "\n";
 
 		if ($type=="multi") {
@@ -72,6 +74,7 @@
 		system("clear");
 	}
 
-	echo "You answered $correct_answers questions correctly\n";
+	echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly\n";
+
 
 	fclose($file);
