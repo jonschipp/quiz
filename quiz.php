@@ -7,14 +7,13 @@
 	 * 		 3) Set delimiter
    */
 
-	$options = getopt("f:t:");
-	$quiz = $options['f'];
-	$type = $options['t'];	
+	$options = getopt("nf:");
+	$quiz = $options['f'];	
 
 	$delimiter = ",";
 
-	if ($argc < 5) {
-		die("Usage: {$argv[0]} -f path/to/quiz.txt -t {multi|fill}\n");
+	if ($argc < 3) {
+		die("Usage: {$argv[0]} -f path/to/quiz.txt {-n}\n");
 	}
 
 	if (($file = @fopen($quiz, "r")) === FALSE) {
@@ -51,7 +50,7 @@
 		$q++;
 		echo $quiz_datum['question'] . "\n";
 
-		if ($type=="multi") {
+		if (!isset($options['n'])) {
 			for ($i=0; $i<count($temp); $i++) {
 				$n = $i+1;
 				echo "$n) " . $temp[$i] . "\n";

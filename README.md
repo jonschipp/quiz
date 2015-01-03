@@ -19,10 +19,10 @@ mkdir PythonForDummies
 
 Read from the quizzes:
 ```
-quiz.php -f FreeBSD/ports.txt -t {multi|fill}
+quiz.php -f FreeBSD/ports.txt -n
 
--f	- file
--t	- quiz type ("fill" for fill in the blank or "multi" for multiple choice"
+-f	- Specifies the quiz file.
+-n	- (optional) No choices. Changes the quiz type to "fill in the blank"
 ```
 
 [More info](http://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013)
