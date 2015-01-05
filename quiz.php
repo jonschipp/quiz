@@ -34,7 +34,7 @@
 	}
 
 	$correct_answers = 0;
-#	shuffle($quiz_data);
+	shuffle($quiz_data);
 	system("clear");
 	$q = 1;
 	foreach ($quiz_data as $quiz_datum) {
