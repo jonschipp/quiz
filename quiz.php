@@ -34,7 +34,7 @@
 	}
 
 	$correct_answers = 0;
-
+#	shuffle($quiz_data);
 	system("clear");
 	$q = 1;
 	foreach ($quiz_data as $quiz_datum) {
@@ -58,11 +58,11 @@
 		}	
 
 		$answer = trim(fgets(STDIN));
-		if ($type == "multi") {
+		if (!isset($options['n'])) {
 			if ($temp[$answer-1] == $quiz_datum['correct']) {
 				$correct_answers++;
 			}
-		} elseif ($type == "fill") {
+		} else {
 			if (strcasecmp($answer, $quiz_datum['correct']) == 0) {
 				$correct_answers++;
 			}
