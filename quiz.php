@@ -4,24 +4,27 @@
 	 *   Add command line options for controlling:
 	 *     1) Number of questions
 	 *     2) Order of questions
-	 * 		 3) Set delimiter
    */
 
+	// get command line options
 	$options = getopt("nf:d:");
 	$quiz = $options['f'];	
 
+	// check if delimiter is set. Default to ","
 	if (isset($options['d'])) {
 		$delimiter = $options['d'];
 	} else {
 		$delimiter = ",";
 	}
 
+	// end with usage statement if file is not specified
 	if ($argc < 3) {
 		die("Usage: {$argv[0]} -f path/to/quiz.txt {-n}\n");
 	}
 
+	// end if file cannot be opened
 	if (($file = @fopen($quiz, "r")) === FALSE) {
-		die("Could not open {$argv[1]} for reading\n");
+		die("Could not open $quiz for reading\n");
 	}
 
 	$cnt = 0;
@@ -38,9 +41,15 @@
 	}
 
 	$correct_answers = 0;
-	shuffle($quiz_data);
-	system("clear");
+
+	// set question counter
 	$q = 1;
+
+	// shuffle quiz questions
+	shuffle($quiz_data);
+	
+	system("clear");
+	
 	foreach ($quiz_data as $quiz_datum) {
 		foreach ($quiz_datum as $key => $value) {
 			if ($key == 'question') {
@@ -50,18 +59,26 @@
 			$temp[] = $value;
                 }
 		shuffle($temp);
+
+		// display question count
 		echo "Question " . $q . " of " . count($quiz_data) . "\n\n";
 		$q++;
+
+		// display qustion
 		echo $quiz_datum['question'] . "\n";
 
+		// display possible answers if -n option is not used
 		if (!isset($options['n'])) {
 			for ($i=0; $i<count($temp); $i++) {
 				$n = $i+1;
 				echo "$n) " . $temp[$i] . "\n";
 			}
 		}	
-
+		
+		// store user's answer
 		$answer = trim(fgets(STDIN));
+
+		// check if answer is correct
 		if (!isset($options['n'])) {
 			if ($temp[$answer-1] == $quiz_datum['correct']) {
 				$correct_answers++;
@@ -71,6 +88,7 @@
 				$correct_answers++;
 			}
 		}
+
 		// clear out the temp array
 		$temp = array();
 
