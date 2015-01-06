@@ -7,10 +7,14 @@
 	 * 		 3) Set delimiter
    */
 
-	$options = getopt("nf:");
+	$options = getopt("nf:d:");
 	$quiz = $options['f'];	
 
-	$delimiter = ",";
+	if (isset($options['d'])) {
+		$delimiter = $options['d'];
+	} else {
+		$delimiter = ",";
+	}
 
 	if ($argc < 3) {
 		die("Usage: {$argv[0]} -f path/to/quiz.txt {-n}\n");

@@ -1,7 +1,7 @@
 quiz
 ====
 
-Goal is to create quizzes on various topics for retrieval practice in CSV format to be read from `quiz` (not written yet).
+Goal is to create quizzes on various topics for retrieval practice in CSV format to be read from `quiz`.
 Put them in a text file where the first field is the question, the second the correct answer, and any fields after a list of other possible choices.
 
 ```
@@ -19,10 +19,11 @@ mkdir PythonForDummies
 
 Read from the quizzes:
 ```
-quiz.php -f FreeBSD/ports.txt -n
+quiz.php -f FreeBSD/ports.txt -n -d "."
 
 -f	- Specifies the quiz file.
--n	- (optional) No choices. Changes the quiz type to "fill in the blank"
+-n	- (optional) No choices. Changes the quiz type to "fill in the blank".
+-d	- (optional) Set the delimiter character. If not specified, the delimiter is ",".
 ```
 
 [More info](http://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013)
