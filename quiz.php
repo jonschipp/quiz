@@ -7,7 +7,7 @@
    */
 
 	// get command line options
-	$options = getopt("nf:d:");
+	$options = getopt("cnf:d:");
 	$quiz = $options['f'];	
 
 	// check if delimiter is set. Default to ","
@@ -49,7 +49,9 @@
 	shuffle($quiz_data);
 	
 	system("clear");
-	
+
+	// if -c is not set (flash card mode) run in default.
+	if (!isset($options['c'])) {	
 	foreach ($quiz_data as $quiz_datum) {
 		foreach ($quiz_datum as $key => $value) {
 			if ($key == 'question') {
@@ -97,5 +99,21 @@
 
 	echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly\n";
 
+	// if -c is set, run in flash card mode	
+	} elseif (isset($options['c'])) {
+		$q = 1;
+		foreach ($quiz_data as $quiz_datum) {
+			// display question count
+			echo "Flash Card " . $q . " of " . count($quiz_data) . "\n\n";
+			$q++;
+			
+			// display qustion
+			echo "Q: " . $quiz_datum['question'] . "\n";
+			fgets(STDIN);
+			echo "A: " . $quiz_datum['correct'] . "\n";
+			fgets(STDIN);
+			system("clear");
+		}
+	}
 
 	fclose($file);

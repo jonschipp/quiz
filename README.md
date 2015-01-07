@@ -24,6 +24,7 @@ quiz.php -f FreeBSD/ports.txt -n -d "."
 -f	- Specifies the quiz file.
 -n	- (optional) No choices. Changes the quiz type to "fill in the blank".
 -d	- (optional) Set the delimiter character. If not specified, the delimiter is ",".
+-c	- (optional) Runs quiz in "Flash Card" mode.
 ```
 
 [More info](http://www.amazon.com/Make-It-Stick-Successful-Learning/dp/0674729013)
