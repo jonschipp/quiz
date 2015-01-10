@@ -9,10 +9,7 @@
 
 // functions
 
-	function getData() {
-		global $quiz_data;
-		global $file;
-		global $delimiter;
+	function getData($file, $delimiter) {
 		$cnt = 0;
 		while (($data = fgetcsv($file, 1000, $delimiter)) !== FALSE) {
 			$quiz_data[$cnt]['question'] = $data[0];
@@ -24,44 +21,32 @@
 			$cnt++;
 		}
 		shuffle($quiz_data);
+		return $quiz_data;
 	}	
 
 
-	function showAnswers() {
-		global $temp;
+	function showAnswers($temp) {
 		for ($i=0; $i<count($temp); $i++) {
 			$n = $i+1;
 			echo "$n) " . $temp[$i] . "\n";
 		}
 	}
 
-	function checkAnswer() {
-		global $options;
-		global $temp;
-		global $correct_answers;
-		global $quiz_data;
-		global $answer;
-		global $quiz_datum;
+	function checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers) {
 		if (!isset($options['n'])) {
 			if ($temp[$answer-1] == $quiz_datum['correct']) {
 				$correct_answers++;
 			}
-		} else {
-			if (strcasecmp($answer, $quiz_datum['correct']) == 0) {
+		} elseif (strcasecmp($answer, $quiz_datum['correct']) == 0) {
 				$correct_answers++;
 			}
-		}
-	}
+		return $correct_answers;
+	}	
 
 
-	function quizMode() {
-		global $quiz_data;
-		global $options;
-		global $temp;
-		global $quiz_datum;
-		global $answer;
-		global $correct_answers;
+	function quizMode($quiz_data, $options) {
 		system("clear");
+		$correct_answers = 0;
 		$q = 1;
 		foreach ($quiz_data as $quiz_datum) {
 			foreach ($quiz_datum as $key => $value) {
@@ -80,21 +65,19 @@
 			echo $quiz_datum['question'] . "\n";
 			// display possible answers if -n option is not used
 			if (!isset($options['n'])) {
-				showAnswers();
+				showAnswers($temp);
 			}	
 			// store user's answer
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
-			checkAnswer();
+			$correct_answers = checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers);
 			$temp = array();
 			system("clear");
 		}
 		echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly\n";
 	}
 
-	function flashMode() {
-		global $quiz_data;
-		global $quiz_datum;
+	function flashMode($quiz_data) {
 		system("clear");
 		$q = 1;
 		foreach ($quiz_data as $quiz_datum) {
@@ -112,8 +95,6 @@
 
 
 
-// set correct_answers
-$correct_answers = 0;
 
 
 // get command line options
@@ -145,16 +126,16 @@ $correct_answers = 0;
 
 
 // run quiz
-	getData();
+	$quiz_data = getData($file, $delimiter);
 
 	// if -c is not set (flash card mode) run in default.
 	if (!isset($options['c'])) {	
-		quizMode();
+		quizMode($quiz_data, $options);
 
 	// if -c is set, run in flash card mode	
 	} elseif (isset($options['c'])) {
 
-		flashMode();
+		flashMode($quiz_data);
 		}
 
 	fclose($file);
