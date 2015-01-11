@@ -9,7 +9,7 @@
 
 	// get command line options
 	$options = getopt("cnf:d:");
-	$quiz = $options['f'];	
+	$quiz = $options['f']
 
 	// check if delimiter is set. Default to ","
 	if (isset($options['d'])) {
@@ -32,9 +32,9 @@
 	$quiz_data = getData($file, $delimiter);
 
 	// if -c is not set (flash card mode) run in default.
-	if (!isset($options['c'])) {	
+	if (!isset($options['c'])) {
 		quizMode($quiz_data, $options);
-	// if -c is set, run in flash card mode	
+	// if -c is set, run in flash card mode
 	} elseif (isset($options['c'])) {
 		flashMode($quiz_data);
 	}
@@ -50,12 +50,12 @@
 
 			for ($i=2; $i<count($data); $i++) {
 				$quiz_data[$cnt]['answer_' . $i] = $data[$i];
-			}	
+			}
 			$cnt++;
 		}
 		shuffle($quiz_data);
 		return $quiz_data;
-	}	
+	}
 
 
 	function showAnswers($temp) {
@@ -74,7 +74,7 @@
 				$correct_answers++;
 			}
 		return $correct_answers;
-	}	
+	}
 
 
 	function quizMode($quiz_data, $options) {
@@ -99,7 +99,7 @@
 			// display possible answers if -n option is not used
 			if (!isset($options['n'])) {
 				showAnswers($temp);
-			}	
+			}
 			// store user's answer
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
