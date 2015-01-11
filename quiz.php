@@ -20,7 +20,7 @@
 
 	// end with usage statement if file is not specified
 	if ($argc < 3) {
-		die("Usage: {$argv[0]} -f path/to/quiz.txt {-n}\n");
+		die("Usage: {$argv[0]} -f path/to/quiz.txt [-n]\n");
 	}
 
 	// end if file cannot be opened
