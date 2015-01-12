@@ -100,7 +100,8 @@
 			if (!isset($options['n'])) {
 				showAnswers($temp);
 			}
-			// store user's answer
+                        // store user's answer
+                        echo "A: ";
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
 			$correct_answers = checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers);
