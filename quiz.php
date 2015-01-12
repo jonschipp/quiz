@@ -9,7 +9,7 @@
 
 	// get command line options
 	$options = getopt("cnf:d:");
-	$quiz = $options['f']
+	$quiz = $options['f'];
 
 	// check if delimiter is set. Default to ","
 	if (isset($options['d'])) {
