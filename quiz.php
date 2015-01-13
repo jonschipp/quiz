@@ -8,7 +8,7 @@
 
 
 	// get command line options
-	$options = getopt("cnf:d:");
+	$options = getopt("cnf:d:q:");
 	$quiz = $options['f'];
 
 	// check if delimiter is set. Default to ","
@@ -29,7 +29,7 @@
 	}
 
 	// run quiz
-	$quiz_data = getData($file, $delimiter);
+	$quiz_data = getData($file, $delimiter, $options);
 
 	// if -c is not set (flash card mode) run in default.
 	if (!isset($options['c'])) {
@@ -42,7 +42,7 @@
 	fclose($file);
 
 	// functions
-	function getData($file, $delimiter) {
+	function getData($file, $delimiter, $options) {
 		$cnt = 0;
 		while (($data = fgetcsv($file, 1000, $delimiter)) !== FALSE) {
 			$quiz_data[$cnt]['question'] = $data[0];
@@ -54,6 +54,9 @@
 			$cnt++;
 		}
 		shuffle($quiz_data);
+		if (isset($options['q'])) {
+			array_splice($quiz_data, $options['q']);
+		}
 		return $quiz_data;
 	}
 
