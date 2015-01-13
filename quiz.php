@@ -1,11 +1,5 @@
 #!/usr/bin/php
 <?php
-	/* TODO:
-	 *   Add command line options for controlling:
-	 *     1) Number of questions
-	 *     2) Order of questions
-         */
-
 
 	// get command line options
 	$options = getopt("cnf:d:q:");
