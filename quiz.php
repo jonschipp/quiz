@@ -104,7 +104,7 @@
 				showAnswers($temp);
 			}
                         // store user's answer
-                        echo "A: ";
+                        echo "\nA: ";
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
 			$correct_answers = checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers);
