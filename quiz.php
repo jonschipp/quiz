@@ -73,10 +73,20 @@
 		if (!isset($options['n'])) {
 			if ($temp[$answer-1] == $quiz_datum['correct']) {
 				$correct_answers++;
+				echo "\nCorrect!";
+				fgets(STDIN);
+			} else {
+				echo "\nIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"";
+				fgets(STDIN);
 			}
 		} elseif (strcasecmp($answer, $quiz_datum['correct']) == 0) {
 				$correct_answers++;
-			}
+				echo "\nCorrect!";
+				fgets(STDIN);
+		} else {
+			echo "\nIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"";
+			fgets(STDIN);
+		}
 		return $correct_answers;
 	}
 
