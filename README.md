@@ -3,6 +3,7 @@ quiz
 
 Goal is to create quizzes on various topics for retrieval practice in CSV format to be read from `quiz`.
 Put them in a text file where the first field is the question, the second the correct answer, and any fields after a list of other possible choices.
+The quiz displays a running percentage of the correct answers out of the total number of questions.
 
 ```
 What format should the quizzes be in?,csv,colon-delimited,json

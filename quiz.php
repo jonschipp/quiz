@@ -95,6 +95,7 @@
 		system("clear");
 		$correct_answers = 0;
 		$q = 1;
+		$percentage = 0;
 		foreach ($quiz_data as $quiz_datum) {
 			foreach ($quiz_datum as $key => $value) {
 				if ($key == 'question') {
@@ -105,9 +106,9 @@
 			}
 			shuffle($temp);
 
+			$total = count($quiz_data);
 			// display question count
-			echo "Question " . $q . " of " . count($quiz_data) . "\n\n";
-			$q++;
+			echo "Question " . $q . " of " . $total . "\t\t\tCorrect: $percentage%\n\n";
 			// display qustion
 			echo $quiz_datum['question'] . "\n";
 			// display possible answers if -n option is not used
@@ -119,10 +120,13 @@
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
 			$correct_answers = checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers);
+			$count1 = ($correct_answers / $total) * 100;
+			$percentage = number_format($count1, 0);
+			$q++;
 			$temp = array();
 			system("clear");
 		}
-		echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly\n";
+		echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly   ($percentage%)\n";
 	}
 
 	function flashMode($quiz_data) {
