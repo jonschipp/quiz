@@ -2,7 +2,7 @@
 <?php
 
 	// get command line options
-	$options = getopt("cnf:d:q:");
+	$options = getopt("cnf:d:q:s:");
 	$quiz = $options['f'];
 
 	// check if delimiter is set. Default to ","
@@ -47,7 +47,14 @@
 			}
 			$cnt++;
 		}
-		shuffle($quiz_data);
+		if (isset($options['s'])) {
+			if ($options['s'] == "seq") {
+			} elseif ($options['s'] == "rev") {
+				$quiz_data=array_reverse($quiz_data);
+			}
+		} else {
+			shuffle($quiz_data);
+		}
 		if (isset($options['q'])) {
 			array_splice($quiz_data, $options['q']);
 		}
