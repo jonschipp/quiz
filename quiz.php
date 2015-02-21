@@ -65,7 +65,7 @@
 	function showAnswers($temp) {
 		for ($i=0; $i<count($temp); $i++) {
 			$n = $i+1;
-			echo "$n) " . $temp[$i] . "\n";
+			echo "\033[36m$n) $temp[$i]\033[0m\n";
 		}
 	}
 
@@ -73,10 +73,10 @@
 		if (!isset($options['n'])) {
 			if ($temp[$answer-1] == $quiz_datum['correct']) {
 				$correct_answers++;
-				echo "\nCorrect!";
+				echo "\n\033[32mCorrect!\033[0m";
 				fgets(STDIN);
 			} else {
-				echo "\nIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"";
+				echo "\n\033[31mIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"\033[0m";
 				fgets(STDIN);
 			}
 		} elseif (strcasecmp($answer, $quiz_datum['correct']) == 0) {
@@ -108,15 +108,15 @@
 
 			$total = count($quiz_data);
 			// display question count
-			echo "Question " . $q . " of " . $total . "\t\t\tCorrect: $percentage%\n\n";
+			echo "\033[33mQuestion $q of $total \033[0m \t\t\t\033[33mCorrect: $percentage%\033[0m\n\n";
 			// display qustion
-			echo $quiz_datum['question'] . "\n";
+			echo "\033[35m" . $quiz_datum['question'] . "\033[0m\n";
 			// display possible answers if -n option is not used
 			if (!isset($options['n'])) {
 				showAnswers($temp);
 			}
                         // store user's answer
-                        echo "\nA: ";
+                        echo "\n\033[35mA: ";
 			$answer = trim(fgets(STDIN));
 			// check if answer is correct
 			$correct_answers = checkAnswer($options, $temp, $answer, $quiz_datum, $correct_answers);
@@ -126,7 +126,7 @@
 			$temp = array();
 			system("clear");
 		}
-		echo "You answered $correct_answers of " . count($quiz_data) . " questions correctly   ($percentage%)\n";
+		echo "\033[36mYou answered $correct_answers of " . count($quiz_data) . " questions correctly\033[0m   \033[33m($percentage%)\033[0m\n\n";
 	}
 
 	function flashMode($quiz_data) {
