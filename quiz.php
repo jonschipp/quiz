@@ -81,10 +81,10 @@
 			}
 		} elseif (strcasecmp($answer, $quiz_datum['correct']) == 0) {
 				$correct_answers++;
-				echo "\nCorrect!";
+				echo "\n\033[32mCorrect!\033[0m";
 				fgets(STDIN);
 		} else {
-			echo "\nIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"";
+			echo "\n\033[31mIncorrect. The correct answer is: \"" . $quiz_datum['correct'] . "\"\033[0m";
 			fgets(STDIN);
 		}
 		return $correct_answers;
@@ -110,7 +110,7 @@
 			// display question count
 			echo "\033[33mQuestion $q of $total \033[0m \t\t\t\033[33mCorrect: $percentage%\033[0m\n\n";
 			// display qustion
-			echo "\033[35m" . $quiz_datum['question'] . "\033[0m\n";
+			echo "\033[35m" . format_text($quiz_datum['question']) . "\033[0m\n\n";
 			// display possible answers if -n option is not used
 			if (!isset($options['n'])) {
 				showAnswers($temp);
@@ -134,13 +134,48 @@
 		$q = 1;
 		foreach ($quiz_data as $quiz_datum) {
 			// display question count
-			echo "Flash Card " . $q . " of " . count($quiz_data) . "\n\n";
+			echo "\033[33mFlash Card " . $q . " of " . count($quiz_data) . "\033[0m\n\n";
 			$q++;
 			// display qustion
-			echo "Q: " . $quiz_datum['question'] . "\n";
+			echo "\033[35mQ: " . format_text($quiz_datum['question']) . "\n\n";
 			fgets(STDIN);
-			echo "A: " . $quiz_datum['correct'] . "\n";
+			echo "A: " . $quiz_datum['correct'] . "\033[0m";
 			fgets(STDIN);
 			system("clear");
 		}
+	}
+	
+	function replacer($match) {
+	    $map = array(
+	        '\\\\' => "\\",
+	        '\\n' => "\n",
+	        '\\r' => "\r",
+	        '\\t' => "\t",
+	        '\\v' => "\v",
+		'\\{' => "\033[0m\n\n\033[037m",
+		'\\}' => "\033[0m\n\n\033[035m",
+	        // etc for \f \$ \"
+	    );
+	 
+	    $match = $match[0]; // So that $match is a scalar, the full matched pattern
+	 
+	    if (!empty($map[$match])) {
+	        return $map[$match];
+	    }
+	 
+	    // Otherwise it's octal or hex notation
+	    if ($match[1] == 'x') {
+	        return chr(hexdec(substr($match, 2)));
+	    }
+	    else {
+	        return chr(octdec(substr($match, 1)));
+	    }
+	}
+
+	function format_text($content){	
+		$replaced = preg_replace_callback(
+                	'/\\\\(\\\\|n|r|t|v|f|{|}|"|[0-7]{1,3}|\x[0-9A-Fa-f]{1,2})/',
+                	'replacer',
+                $content);
+		return $replaced;
 	}
