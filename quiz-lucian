@@ -1,0 +1,71 @@
+#!/bin/sh
+# quiz.sh: quiz game
+
+# OPTIONS
+DELIMITER=','
+
+# FUNCTIONS
+_evaluate() {
+  printf "[2J[1;1f"
+  if [ "$t" = "0" ]; then
+    printf "quiz: [2m${FILE}[m"
+  else
+    if [ "$x" = "$n" ]; then
+      s=$(($s+1))
+      printf "[32mCorrect[m"
+    elif [ "$x" = "q" ]; then exit 0
+    else printf "[31mIncorrect[m"
+    fi
+  fi
+  if ! [ "$t" -ge "$N" ]; then
+    x="Points: ${s}   #$(($t+1))/$N"
+    printf "[1;$(($COLS-${#x}))f${x}"
+  fi
+}
+
+_usage() {
+cat << EOF
+USAGE:    $(basename $0) [options] <file>
+OPTIONS:  -d : specify delimiter (default: '${DELIMITER}')
+          -h : display help
+EOF
+}
+
+# PARAMETERS
+[ -z "$1" ] && _usage && exit 1
+while getopts ":d:h" opt; do
+  case "$opt" in
+    'd') DELIMITER="$OPTARG"  ;;
+    'h') _usage && exit 0     ;;
+    *  ) _usage && exit 1     ;;
+  esac
+done
+shift $(($OPTIND-1))
+if [ -f "$1" ]; then
+  FILE="$1"
+else
+  printf "${1}: no such file"; exit 2
+fi
+
+# PROCEDURE
+COLS=$(tput cols)
+[ "$COLS" -gt 70 ] && W=70 || W=$(($COLS-10))
+
+N=$(wc -l < "$FILE") s=0 t=0
+while read l <&3; do
+  _evaluate
+  t=$(($t+1))   # t: total points; q: question; a: all answers
+  q=$(echo "$l" | cut -d "$DELIMITER" -f1  | fmt -w "$W")
+  a=$(echo "$l" | cut -d "$DELIMITER" -f2- | tr "$DELIMITER" "\n" | shuf)
+  c=$(echo "$l" | cut -d "$DELIMITER" -f2)            # correct ans
+  n=$(echo "$a" | grep -Fnx -- "$c" | cut -d':' -f1)  # correct num
+  printf "\n\n%s\n" "$q"
+  i=0 echo "$a" | while read x; do
+    i=$(($i+1))
+    printf "  %s)  %s\n" "$i" "$x"
+  done
+  unset x; while [ -z "$x" ]; do printf "> "; read x; done
+done 3< "$FILE"
+
+_evaluate
+printf "\nScore:\t%s/%s (%s%%)\n" "$s" "$t" "$(($s*100/$t))"
