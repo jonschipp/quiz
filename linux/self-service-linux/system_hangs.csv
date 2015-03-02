@@ -1,0 +1,15 @@
+When a system panics and logs cannot be written to disk debugging information can be sent to the serial port?,true,false
+What kind of cable is used to physically connect to serial console?,null-modem,crossover,rs232,rs485
+The first serial device in a Linux filesystem is accessed by what file?,/dev/ttyS0,/dev/serial/,/dev/console,/dev/tty0
+What program is used to set the communication speed of a serial device?,stty,terminfo,tput,tset
+What is speed in baud should the serial console be set to?,38400,24000,8000,9660
+Enabling the serial console on a Linux system requires setting which kernel boot parameter via the GRUB bootloader?,console=ttyS0,console=tty,serial=ttyS0,serial=tty
+The serial console kernel option should not be set before any other serial console boot loader settings?,false,true
+The SysRq Kernel Magic hotkey provides the debugging information and interaction with a panicked kernel?,true,false
+The Linux kernel generates a bunch of information to aid the user in debugging a trap - what is the name for this dump?,Oops Report,Crash Report, Memory Dump
+An Oops line containing Oops: 0002 [1] - indicates which error code?,page fault,read error, write error, protection fault
+In a line containing Oops: 0002 [1] - what is the value of the die counter?,1,0,2
+The die counter in an Oops report indicates?,number of oopses since last reboot, PID of errored process, number of cores, error code returned
+Not tainted means that the kernel has not been tainted by non-GPL or forcefully loaded modules?,true,false
+Which register contains the ring level of where a trap has occurred?,CS,DS,EFLAGS,RIP
+What program scans through source code lines and builds an index for debugging?,cscope,grep,coder,kverify
