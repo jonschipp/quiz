@@ -1,16 +1,14 @@
-What is the default run as (command executed as) user in sudo?,root,wheel,admin,you
-The host specification is valid in 'mike 192.0.2.1 = ALL'?,true,false
 What function is often used to cause a panic in an application?,abort(),panic(),trap(),die()
 A trap is crash that is initiated by what?,hardware and OS,hardware and application,application,drivers
-A panic is crash that is initiated by what?,application,hardware and application,application,drivers
-SIGSEGV, SIGBUS, and SIGILL are signals sent during what process?,trap,panic,kill
+A panic is crash that is initiated by what?,application,hardware and application,drivers
+SIGSEGV - SIGBUS - and SIGILL are signals sent during what process?,trap,panic,kill
 When a process is not consuming any CPU and is stuck waiting on a system call you're experiencing a what?,true hang,io wait,idle system
 Mutual exclusion over access of a resource is called what?,lock,block,latch
-Steps that consist of reprioritizing the shell to highest priority, entering the /proc directory, unsetting LD_LIBRARY_PATH and PATH, and saving commands in a text file are used in which situation?,very busy system, idle system, failing system, unresponsive system
+Steps that consist of reprioritizing the shell to highest priority - 1. entering the /proc directory 2. unsetting LD_LIBRARY_PATH and PATH 3. and saving commands in a text file are used in which situation?,very busy system, idle system, failing system, unresponsive system
 A special piece of code specifically designed to react and handle an error is called a what?,error path, error check, error test, signal handler
-Detecting an misbehaving application due to error path e.g. a file not found, can be done easily with which tools?,strace and ltrace,logger,gdb,profiler
+Detecting an misbehaving application due to error path e.g. a file not found - can be done easily with which tools?,strace and ltrace,logger,gdb,profiler
 A special type of function that runs within the kernel is called?,system call,iterative function,recursive function,kernel call
-The open system call is calling a function in the C library that, in turn, interrupts into the kernel to invoke the actual system call being a wrapper for open()?,true,false
+The open system call is calling a function in the C library that interrupts into the kernel to invoke the actual system call being a wrapper for open()?,true,false
 The return value for a system call is stored in which register?,EAX,EBX,ECX,ESP
 Linux supports up to how many arguments for system calls?,6,7,4,5
 On Linux the SYSCALL_VECTOR is also known as?,int 0x80,i386,entry.S,EAX
@@ -18,10 +16,10 @@ Which instruction traps inside the kernel and invokes the IDT (Interrupt Descrip
 strace is able to stop at each entry and exit of system call by using which kernel interface?,ptrace,strace,ltrace,tracer
 Function level tracing can be performed by which tool?,ltrace,tracer,strace,profiler,gdb
 What strace flag is used to trace a process and all of its children?,-f,-c,-s,-t
-Which strace flag is used to print the time between system calls?-r,-f,-t,-T
-Which strace flag is used to print the time spent in a system call?-T,-t,-r,-s
-Which strace flag is used to print microsecond timestamps?-tt,-t,-T,-v
+Which strace flag is used to print the time between system calls?,-r,-f,-t,-T
+Which strace flag is used to print the time spent in a system call?,-T,-t,-r,-s
+Which strace flag is used to print microsecond timestamps?,-tt,-t,-T,-v
 Which strace flag is used to display system calls in order of total time spent?,-c,-T,-r,-s
-Which strace flag will list the full output of system call, not truncating it?-v,-c,-p,-V
-Which strace flag will limit the number of bytes printed for each system call?-s,-c,-S,-C
+Which strace flag will list the full output of system call not truncating it?-v,-c,-p,-V
+Which strace flag will limit the number of bytes printed for each system call?,-s,-c,-S,-C
 strace option -p can be used to attach to a running process?,true,false
