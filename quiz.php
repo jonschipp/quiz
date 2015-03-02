@@ -144,9 +144,7 @@
 			system("clear");
 		}
 	}
-	
-<<<<<<< HEAD
-=======
+
 	function replacer($match) {
 	    $map = array(
 	        '\\\\' => "\\",
@@ -181,4 +179,3 @@
                 $content);
 		return $replaced;
 	}
->>>>>>> parent of 50ca6e5... Revert "fix issue #5"
