@@ -44,7 +44,7 @@ shift $(($OPTIND-1))
 if [ -f "$1" ]; then
   FILE="$1"
 else
-  printf "${1}: no such file"; exit 2
+  printf "${1}: no such file\n"; exit 2
 fi
 
 # PROCEDURE
