@@ -23,3 +23,4 @@ Which strace flag is used to display system calls in order of total time spent?,
 Which strace flag will list the full output of system call not truncating it?-v,-c,-p,-V
 Which strace flag will limit the number of bytes printed for each system call?,-s,-c,-S,-C
 strace option -p can be used to attach to a running process?,true,false
+The EPERM error occurs because the kernel only allows one process at a time to trace a specific process?,true,false
