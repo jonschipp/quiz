@@ -39,6 +39,7 @@
 	function getData($file, $delimiter, $options) {
 		$cnt = 0;
 		while (($data = fgetcsv($file, 1000, $delimiter)) !== FALSE) {
+			if (substr($data[0], 0, 1) != '#') {
 			$quiz_data[$cnt]['question'] = $data[0];
 			$quiz_data[$cnt]['correct'] = $data[1];
 
@@ -46,6 +47,7 @@
 				$quiz_data[$cnt]['answer_' . $i] = $data[$i];
 			}
 			$cnt++;
+			}
 		}
 		if (isset($options['s'])) {
 			if ($options['s'] == "seq") {
