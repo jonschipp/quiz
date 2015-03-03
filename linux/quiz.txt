@@ -6,7 +6,7 @@ What command is used to remove a variable from the bash shell?,unset,noset,varmo
 In what configuration file is the default runlevel set?,/etc/inittab,/etc/rc/inittab,/etc/init.d/runlevel,/etc/rc.d/runlevel
 Which section of the man pages holds the file formats?,5,3,8,1
 What is the name of the file which lists the filesystems that are to be mounted during startup?,/etc/fstab,/etc/fstable,/etc/filesystem,/etc/mount
-After a new program has been installed in the default path the locate command does not find it. What command can be used to ensure that locate knows about the new command?,updatedb,slocate,locatedb,whereis
+After a new program has been installed in the default path the locate command does not find it.\nWhat command can be used to ensure that locate knows about the new command?,updatedb,slocate,locatedb,whereis
 What is the configuration file that ldconfig uses when checking for available shared libraries?,/etc/ld.so.conf,/etc/ldd.conf,/etc/ldconfig.so.conf,/etc/ldconfig.conf
 Which nice value results in the program receiving most favourable scheduling?,-20,0,20,-19
 What command can be used to search the whatis database?,apropos,whereis,locate,slocate
