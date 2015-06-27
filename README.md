@@ -1,4 +1,4 @@
-quiz
+Quiz
 ====
 
 Goal is to create quizzes on various topics for retrieval practice in CSV format to be read from `quiz`.
